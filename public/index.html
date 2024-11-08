@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sync Audio</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+    .container {
+      text-align: center;
+    }
+    button {
+      padding: 15px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="main.js"></script>
+</head>
+<!--<body>
+<div class="container">
+  <h1>Audio Sync Example</h1>
+  <audio id="audioPlayer" preload="auto">
+    <source src="music/sample1.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+  <br>
+  <button id="playButton">Play Audio for Everyone</button>
+</div>-->
+<h2>My soundboard</h2>
+<div id="soundboard" class="pie"></div>
+
+<audio class="audioPlayer" preload="auto">
+  <source src="music/sample1.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+<audio class="audioPlayer" preload="auto">
+  <source src="music/AFlowersFeelings.ogg" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+<audio class="audioPlayer" preload="auto">
+  <source src="music/ExaltYouMaster.ogg" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+<audio class="audioPlayer" preload="auto">
+  <source src="music/KnightofNights.ogg" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+</body>
+</html>
