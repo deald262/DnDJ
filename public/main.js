@@ -2,6 +2,7 @@ window.addEventListener('load', () => {
     const socket = io(); // Connect to the server via Socket.io
     const audioPlayers = document.getElementsByClassName('audioPlayer');
     let index = 0;
+    let initiativeTracker = {turn:0, players:[]};
 /*
     const playButton = document.getElementById('playButton');
     console.log(playButton);
@@ -13,6 +14,14 @@ window.addEventListener('load', () => {
     });
 
 */
+    socket.on("next-player", (turn)=> {
+        initiativeTracker.turn = turn;
+    })
+    socket.on("player-added", (initiative) => {
+        console.log("Initiative updated");
+        initiativeTracker = initiative;
+        updateInitiativeTrackerVisual();
+    })
     socket.on("global-updated", (data) => {
         index = data.index;
     })
@@ -84,7 +93,27 @@ window.addEventListener('load', () => {
     }
     google.charts.setOnLoadCallback(drawDanielChart);
 
+    const addPlayer = () => {
+        const playerName = document.getElementById('playerName').value;
+        initiativeTracker.players.push({name: playerName});
+        socket.emit("addPlayer", playerName);
+    }
+    const nextTurn = () => {
+        socket.emit("nextTurn");
+    }
+    const updateInitiativeTrackerVisual = () => {
+        console.log(initiativeTracker);
+        const table = document.getElementById("initiative");
+        table.innerHTML = "";
+        for (let i = 0; i < initiativeTracker.players.length; i++) {
+            const tr = document.createElement("tr");
+            const playerName = document.createElement("td");
+            playerName.innerText = initiativeTracker.players[i].name;
+            tr.appendChild(playerName);
+            table.appendChild(tr);
+        }
 
+    }
 })
 
 
