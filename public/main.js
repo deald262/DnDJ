@@ -92,15 +92,21 @@ window.addEventListener('load', () => {
         socket.emit('play-audio');
     }
     google.charts.setOnLoadCallback(drawDanielChart);
-
+    //button press
     const addPlayer = () => {
         const playerName = document.getElementById('playerName').value;
-        initiativeTracker.players.push({name: playerName});
         socket.emit("addPlayer", playerName);
     }
     const nextTurn = () => {
         socket.emit("nextTurn");
     }
+    const addBtn = document.getElementById('add');
+    const nextBtn = document.getElementById("next");
+    nextBtn.addEventListener("click", nextTurn);
+    addBtn.addEventListener('click', addPlayer);
+
+    //button press
+
     const updateInitiativeTrackerVisual = () => {
         console.log(initiativeTracker);
         const table = document.getElementById("initiative");
