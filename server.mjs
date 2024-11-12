@@ -26,10 +26,11 @@ io.on("connection", (socket) => {
     })
     io.emit("player-added", initiativeTracker);
     socket.on("nextPlayer", () => {
-        console.log("Turn: " + initiativeTracker.turn + " of " + initiativeTracker.players.length + " players");
+        console.log("Turn: " + initiativeTracker.turn+1 + " of " + initiativeTracker.players.length + " players");
         initiativeTracker.turn++;
         if(initiativeTracker.players.length===initiativeTracker.turn){
             initiativeTracker.turn=0;
+            console.log("new turn");
         }
         io.emit("next-player", initiativeTracker.turn);
     })

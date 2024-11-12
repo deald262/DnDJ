@@ -15,7 +15,12 @@ window.addEventListener('load', () => {
 
 */
     socket.on("next-player", (turn)=> {
+        const table = document.getElementById('initiative');
+        const rows = table.getElementsByTagName('tr');
+        rows[initiativeTracker.turn].classList.remove("turn");
+        console.log(turn);
         initiativeTracker.turn = turn;
+        rows[initiativeTracker.turn].classList.add("turn");
     })
     socket.on("player-added", (initiative) => {
         console.log("Initiative updated");
@@ -98,7 +103,7 @@ window.addEventListener('load', () => {
         socket.emit("addPlayer", playerName);
     }
     const nextTurn = () => {
-        socket.emit("nextTurn");
+        socket.emit("nextPlayer");
     }
     const addBtn = document.getElementById('add');
     const nextBtn = document.getElementById("next");
@@ -119,7 +124,11 @@ window.addEventListener('load', () => {
             table.appendChild(tr);
         }
 
+        const rows = table.getElementsByTagName('tr');
+        rows[initiativeTracker.turn].classList.add("turn");
+
     }
+
 })
 
 
